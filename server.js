@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// jwt
+// json web token
 
 app.get("*", checkUser);
 app.get("/jwtid", requireAuth, (req, res) => {
