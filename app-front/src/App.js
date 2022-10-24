@@ -9,6 +9,7 @@ import { getUser } from "./components/User";
 
 function App() {
   const [uid, setUid] = useState(null);
+
   return (
     <div className="App">
       <UidContext.Provider value={uid}>

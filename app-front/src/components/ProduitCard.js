@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 
 function ProduitCard(produit) {
-  console.log(produit.produit._id);
+  /*  console.log(produit.produit._id); */
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Body>
