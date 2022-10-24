@@ -1,0 +1,16 @@
+nav {
+    background-color: #292929;
+    border: 2px solid #ececec;
+    border-radius: 20px;
+    padding-top: 5px;
+}
+
+nav span {
+    color: #ececec;
+    transition: color ease-in-out .2s;
+}
+
+nav span:hover {
+    color: #ffa500;
+    transition: color ease-in-out .2s;
+}
