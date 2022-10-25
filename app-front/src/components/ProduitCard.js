@@ -1,35 +1,77 @@
-import React from "react";
-import { Card } from "react-bootstrap";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-function ProduitCard(produit) {
-  /*  console.log(produit.produit._id); */
-  return (
-    <Card style={{ width: "18rem" }}>
-      <Card.Body>
-        <Card.Text>
-          <p>
-            <strong>ID :</strong> {produit.produit._id}
-          </p>
+import '../ProduitCard.css';
 
-          <p>
-            <strong>name :</strong> {produit.produit.name}
-          </p>
+export default function ProduitCard({ produit, addToCart }) {
 
-          <p>
-            <strong>price :</strong> {produit.produit.price}
-          </p>
+    const [ quantity, setQuantity ] = useState(0)
 
-          <p>
-            <strong>category :</strong> {produit.produit.category}
-          </p>
+    const getEmoji = category => {
+        switch(category) {
+            case 'tee-shirt':
+                return '👕';
 
-          <p>
-            <strong>inStock :</strong> {produit.produit.inStock}
-          </p>
-        </Card.Text>
-      </Card.Body>
-    </Card>
-  );
+            case 'pantalon':
+                return '👖';
+
+            case 'pull':
+                return '🧵';
+
+            case 'chaussures':
+                return '👟';
+
+            default:
+                return false;
+        }
+    }
+
+    const handleAddingToCart = (id, inStock, qte, name, price) => {
+        if(qte > 0 && qte <= inStock) {
+            addToCart({ id, qte, name, price })
+            setQuantity(0)
+        }
+    }
+
+    const deleteProduit = async id => {
+        await axios({
+            method: 'DELETE',
+            url: 'http://localhost:5000/api/produit/' + id
+        }).then(response => {
+            console.log(response.data)
+            alert('Produit supprimé')
+            window.location = '/'
+        }).catch(error => {
+            console.log(error)
+        })
+    }
+
+    return (
+        <div className='ProduitCard my-2 p-3'>
+            <div className='ProduitCard-header mb-2 d-flex justify-content-between'>
+                <small className='text-uppercase'>{ getEmoji(produit.category) + ' ' + produit.category }</small>
+                <div className='ProduitCard-actions'>
+                    <Link to={"/modifier-produit/" + produit._id} title="Modifier le produit" className='mx-4'><span className='material-symbols-rounded'>edit</span></Link>
+                    <span className='material-symbols-rounded' title='Supprimer le produit' onClick={() => deleteProduit(produit._id)}>delete</span>
+                </div>
+            </div>
+            <div className='ProduitCard-body d-flex justify-content-between'>
+                <div className='ProduitCard-description'>
+                    <span>{ produit.name }</span><br/>
+                    <div>
+                        { produit.inStock > 0 ? <span className="disponible">En stock</span> : <span className="indisponible">Rupture de stock</span> } · <span><strong>{ produit.price }</strong></span>
+                    </div>
+                </div>
+                {
+                    produit.inStock > 0 ? (
+                        <div className='ProduitCard-addToCart d-flex align-items-center'>
+                            <input type='number' min='1' max={ produit.inStock } step='1' value={quantity} onChange={ e => setQuantity(e.target.value) } />
+                            <span className='material-symbols-rounded ms-2' title='Ajouter au panier' onClick={ () => handleAddingToCart(produit._id, produit.inStock, quantity, produit.name, produit.price) }>add_circle</span>
+                        </div>
+                    ) : ''
+                }
+            </div>
+        </div>
+    )
 }
-
-export default ProduitCard;
