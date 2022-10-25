@@ -1,0 +1,34 @@
+.ProduitCard {
+    background-color: #ffffff;
+}
+
+.ProduitCard-header {
+    border-bottom: 2px solid #ECECEC;
+}
+
+.ProduitCard-header small {
+    font-size: 80%;
+}
+
+.ProduitCard-actions span {
+    font-size: 16px;
+    cursor: pointer;
+    color: #ffa500;
+}
+
+.ProduitCard-description .disponible,
+.ProduitCard-description .indisponible {
+    font-style: italic;
+}
+
+.ProduitCard-description .disponible {
+    color: green;
+}
+
+.ProduitCard-description .indisponible {
+    color: red;
+}
+
+.ProduitCard-addToCart span {
+    cursor: pointer;
+}

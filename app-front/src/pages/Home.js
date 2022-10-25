@@ -29,16 +29,47 @@ export default function Home() {
 
 
     return (
-        <Container fluid="md" className="my-2">
+        <Container fluid="md" className="mb-5">
             <Row>
                 <Col className='d-flex align-items-baseline'>
                     <h1>Accueil</h1>
                     <Link to="/nouveau-produit" title="Ajouter un nouveau produit" className='ms-auto'>Ajouter un nouveau produit</Link>
                 </Col>
             </Row>
-            <Row className='justify-content-md-start'>
+            <Row className='justify-content-md-start mt-3'>
+                <h3>👟 Chaussures</h3>
                 {
-                    produits.map(produit => (
+                    produits.filter(produit => produit.category === 'chaussures').map(produit => (
+                        <Col md="4" key={produit._id}>
+                            <ProduitCard produit={produit} />
+                        </Col>
+                    ))
+                }
+            </Row>
+            <Row className='justify-content-md-start mt-5'>
+                <h3>👖 Pantalons</h3>
+                {
+                    produits.filter(produit => produit.category === 'pantalon').map(produit => (
+                        <Col md="4" key={produit._id}>
+                            <ProduitCard produit={produit} />
+                        </Col>
+                    ))
+                }
+            </Row>
+            <Row className='justify-content-md-start mt-5'>
+                <h3>🧵 Pulls</h3>
+                {
+                    produits.filter(produit => produit.category === 'pull').map(produit => (
+                        <Col md="4" key={produit._id}>
+                            <ProduitCard produit={produit} />
+                        </Col>
+                    ))
+                }
+            </Row>
+            <Row className='justify-content-md-start mt-5'>
+                <h3>👕 Tee-shirts</h3>
+                {
+                    produits.filter(produit => produit.category === 'tee-shirt').map(produit => (
                         <Col md="4" key={produit._id}>
                             <ProduitCard produit={produit} />
                         </Col>
