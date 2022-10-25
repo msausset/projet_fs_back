@@ -15,10 +15,12 @@ import NewProduit from './pages/NewProduit';
 import UpdateProduit from './pages/UpdateProduit';
 import Cart from './components/Cart';
 import Account from './pages/Account';
+import Signin from './pages/Signin';
 
 import './App.css';
 
 function App() {
+
   return (
     <div className="App">
       <Router>
@@ -31,6 +33,7 @@ function App() {
             <Route path="modifier-produit/:id" element={<UpdateProduit />} />
             <Route path="mon-panier" element={<Cart />} />
             <Route path="mon-compte" element={<Account />} />
+            <Route path="connexion" element={<Signin />} />
           </Route>
         </Routes>
       </Router>
