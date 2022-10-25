@@ -11,7 +11,7 @@ export default function NewProduit() {
     const handleSubmit = async nouveauProduit => {
 
         await axios({
-            method: 'POST',
+            method: 'post',
             url: 'http://localhost:5000/api/produit/',
             data: {
                 name: nouveauProduit.name,

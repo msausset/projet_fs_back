@@ -22,7 +22,7 @@ export default function ProduitForm({ action, produit, onSubmit }) {
                 <Form.Group className='mb-3'>
                     <Form.Label>Catégorie</Form.Label>
                     <Form.Select onChange={e => setCategory(e.target.value)}>
-                        <option value="chaussure">Chaussures</option>
+                        <option value="chaussures">Chaussures</option>
                         <option value="pantalon">Pantalon</option>
                         <option value="pull">Pull</option>
                         <option value="tee-shirt">Tee-Shirt</option>
