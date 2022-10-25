@@ -5,6 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Container from 'react-bootstrap/Container';
 
+// Importation de react-toastify
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import NewProduit from './pages/NewProduit';
@@ -19,6 +23,7 @@ function App() {
     <div className="App">
       <Router>
         <Navbar />
+        <ToastContainer />
         <Routes>
           <Route path="/">
             <Route index element={<Home />} />

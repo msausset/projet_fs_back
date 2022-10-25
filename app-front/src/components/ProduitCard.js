@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import '../ProduitCard.css';
 
-export default function ProduitCard({ produit }) {
+export default function ProduitCard({ produit, addToCart }) {
+
+    const [ quantity, setQuantity ] = useState(0)
 
     const getEmoji = category => {
         switch(category) {
@@ -21,6 +24,13 @@ export default function ProduitCard({ produit }) {
 
             default:
                 return false;
+        }
+    }
+
+    const handleAddingToCart = (id, inStock, qte, name, price) => {
+        if(qte > 0 && qte <= inStock) {
+            addToCart({ id, qte, name, price })
+            setQuantity(0)
         }
     }
 
@@ -56,8 +66,8 @@ export default function ProduitCard({ produit }) {
                 {
                     produit.inStock > 0 ? (
                         <div className='ProduitCard-addToCart d-flex align-items-center'>
-                            <input type='number' min='1' max={ produit.inStock } step='1' />
-                            <span className='material-symbols-rounded ms-2' title='Ajouter au panier'>add_circle</span>
+                            <input type='number' min='1' max={ produit.inStock } step='1' value={quantity} onChange={ e => setQuantity(e.target.value) } />
+                            <span className='material-symbols-rounded ms-2' title='Ajouter au panier' onClick={ () => handleAddingToCart(produit._id, produit.inStock, quantity, produit.name, produit.price) }>add_circle</span>
                         </div>
                     ) : ''
                 }

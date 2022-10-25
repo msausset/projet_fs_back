@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -8,11 +9,14 @@ import Col from 'react-bootstrap/Col';
 
 import ProduitCard from '../components/ProduitCard';
 
+import cart from '../Cart.json';
+
 import '../Home.css';
 
 export default function Home() {
 
     const [ produits, setProduits ] = useState([])
+    const [ panier, setPanier ] = useState(cart)
 
     useEffect(() => {
 
@@ -27,6 +31,20 @@ export default function Home() {
 
     }, [])
 
+    const addToCart = commande => {
+        const commandes = panier
+
+        const nouveauPanier = [
+            ...commandes,
+            commande
+        ]
+
+        setPanier(nouveauPanier)
+
+        localStorage.setItem('panier', JSON.stringify(nouveauPanier))
+        
+        toast('Ajouté au panier !')
+    }
 
     return (
         <Container fluid="md" className="mb-5">
@@ -41,7 +59,7 @@ export default function Home() {
                 {
                     produits.filter(produit => produit.category === 'chaussures').map(produit => (
                         <Col md="4" key={produit._id}>
-                            <ProduitCard produit={produit} />
+                            <ProduitCard produit={produit} addToCart={addToCart} />
                         </Col>
                     ))
                 }
@@ -51,7 +69,7 @@ export default function Home() {
                 {
                     produits.filter(produit => produit.category === 'pantalon').map(produit => (
                         <Col md="4" key={produit._id}>
-                            <ProduitCard produit={produit} />
+                            <ProduitCard produit={produit} addToCart={addToCart} />
                         </Col>
                     ))
                 }
@@ -61,7 +79,7 @@ export default function Home() {
                 {
                     produits.filter(produit => produit.category === 'pull').map(produit => (
                         <Col md="4" key={produit._id}>
-                            <ProduitCard produit={produit} />
+                            <ProduitCard produit={produit} addToCart={addToCart} />
                         </Col>
                     ))
                 }
@@ -71,7 +89,7 @@ export default function Home() {
                 {
                     produits.filter(produit => produit.category === 'tee-shirt').map(produit => (
                         <Col md="4" key={produit._id}>
-                            <ProduitCard produit={produit} />
+                            <ProduitCard produit={produit} addToCart={addToCart} />
                         </Col>
                     ))
                 }
