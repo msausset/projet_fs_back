@@ -4,6 +4,8 @@ import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
+import '../ProduitCard.css';
+
 export default function ProduitCard({ produit }) {
 
     const deleteProduit = async id => {
@@ -20,8 +22,8 @@ export default function ProduitCard({ produit }) {
     }
 
     return (
-        <Card className='my-2'>
-            <Card.Header as="small" className='text-uppercase'>{ produit.category }</Card.Header>
+        <Card className='ProduitCard my-2'>
+            <Card.Header as="small" className='ProduitCard-Header text-uppercase pb-3'>{ produit.category }</Card.Header>
             <Card.Body>
                 <Card.Title>{ produit.name }</Card.Title>
                 <Card.Text>{ produit.price }</Card.Text>

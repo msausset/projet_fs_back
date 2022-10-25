@@ -29,7 +29,7 @@ export default function Home() {
 
 
     return (
-        <Container fluid="md">
+        <Container fluid="md" className="my-2">
             <Row>
                 <Col className='d-flex align-items-baseline'>
                     <h1>Accueil</h1>

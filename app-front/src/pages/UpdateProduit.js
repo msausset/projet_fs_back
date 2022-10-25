@@ -24,7 +24,7 @@ export default function UpdateProduit() {
             console.log(error)
         })
 
-    }, [produit])
+    }, [id, produit])
 
     const handleSubmit = async produitModifie => {
 
