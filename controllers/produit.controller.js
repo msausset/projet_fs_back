@@ -9,7 +9,7 @@ module.exports.readProduit = (req, res) => {
     if (!err) res.send(docs);
     // Si erreur : affichage erreur
     else console.log("Erreur accès données : " + err);
-  }).sort({ createdAt: -1 });
+  }).sort({ category: 1, name: 1, price: 1, createdAt: -1 });
 };
 
 // Récupération d'un restau
